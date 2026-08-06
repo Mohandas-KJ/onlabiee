@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#Check for the logs dir
+if ! [ -d logs ]; then
+    mkdir logs
+fi
+
+i=1
+datee=$(date "+%Y-%m-%d")
+
+while [ "${log,,}" != "done" ]; do
+    
+     
+     read -p "Log ${i}: " log
+
+     if [ "${log,,}" = "done" ]; then
+         echo "-------- END OF SESSION --------" >> logs/${datee}.log
+         echo "" >> logs/${datee}.log
+         continue
+     fi
+
+     if ! [ -f logs/${datee}.log ]; then
+           echo "[${datee} $(date "+%H:%M:%S")] - ${log}" > logs/${datee}.log
+     else
+           echo "[${datee} $(date "+%H:%M:%S")] - ${log}" >> logs/${datee}.log
+     fi
+     let i++
+done

@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Linux editor backups
+*~
+*.swp
+*.swo
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Shell history
+.history
+
+# Generated files
+*.log
+
+# Build artifacts (if any)
+dist/
+test/
