@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+EXECUTABLE="onlabiee"
+INSTALL_DIR="/usr/local/bin"
+
+chmod +x "$EXECUTABLE"
+
+echo "Installing onlabiee...."
+
+sudo cp "$EXECUTABLE" "$INSTALL_DIR/$EXECUTABLE"
+
+echo "Successfully installed onlabiee"
+echo
+echo "Run:"
+echo "     onlabiee help "
