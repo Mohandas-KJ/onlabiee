@@ -2,15 +2,28 @@
 
 set -e
 
-EXECUTABLE="onlabiee"
-INSTALL_DIR="/usr/local/bin"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-chmod +x "$EXECUTABLE"
+INSTALL_DIR="/usr/local/lib/onlabiee"
+BIN_DIR="/usr/local/bin"
 
 echo "Installing onlabiee...."
 
-sudo cp "$EXECUTABLE" "$INSTALL_DIR/$EXECUTABLE"
+sudo mkdir -p "$INSTALL_DIR"
 
+sudo cp "$SCRIPT_DIR/onlabiee" "$INSTALL_DIR/"
+sudo cp -r "$SCRIPT_DIR/commands" "$INSTALL_DIR/"
+
+sudo chmod +x "$INSTALL_DIR/onlabiee"
+
+sudo tee "$BIN_DIR/onlabiee" > /dev/null << EOF
+#!/usr/bin/env bash
+exec "$INSTALL_DIR/onlabiee" "\$@"
+EOF
+
+sudo chmod +x "$BIN_DIR/onlabiee"
+
+echo
 echo "Successfully installed onlabiee"
 echo
 echo "Run:"
