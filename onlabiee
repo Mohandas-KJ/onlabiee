@@ -1,28 +1,31 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#Check for the logs dir
-if ! [ -d logs ]; then
-    mkdir logs
-fi
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-i=1
-datee=$(date "+%Y-%m-%d")
+source "$SCRIPT_DIR/commands/init.sh"
+source "$SCRIPT_DIR/commands/status.sh"
+source "$SCRIPT_DIR/commands/history.sh"
+source "$SCRIPT_DIR/commands/help.sh"
 
-while [ "${log,,}" != "done" ]; do
-    
-     
-     read -p "Log ${i}: " log
-
-     if [ "${log,,}" = "done" ]; then
-         echo "-------- END OF SESSION --------" >> logs/${datee}.log
-         echo "" >> logs/${datee}.log
-         continue
-     fi
-
-     if ! [ -f logs/${datee}.log ]; then
-           echo "[${datee} $(date "+%H:%M:%S")] - ${log}" > logs/${datee}.log
-     else
-           echo "[${datee} $(date "+%H:%M:%S")] - ${log}" >> logs/${datee}.log
-     fi
-     let i++
-done
+case "$1" in
+	init)
+	    init_onlabiee
+	    ;;
+	status)
+	    show_status
+	    ;;
+	history)
+	    show_history
+	    ;;
+	help|-h|--help)
+	    show_help
+	    ;;
+	"")
+	    start_logr
+	    ;;
+	*)
+	    echo "Unknown command: $1"
+	    echo "Run 'onlabiee help' for usage"
+	    exit 1
+	    ;;
+esac
