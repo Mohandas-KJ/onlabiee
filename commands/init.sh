@@ -15,7 +15,7 @@ init_onlabiee() {
 
     mkdir -p "$LOGS_DIR"
 
-    echo > "$CONF_F" << EOF
+    cat > "$CONF_F" << EOF
 PROJECT=$PROJECT_NAME
 CREATED=$(date "+%Y-%m-%d %H:%M:%S")
 EOF
