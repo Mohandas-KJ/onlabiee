@@ -7,6 +7,7 @@ source "$SCRIPT_DIR/commands/status.sh"
 source "$SCRIPT_DIR/commands/history.sh"
 source "$SCRIPT_DIR/commands/help.sh"
 source "$SCRIPT_DIR/commands/logr.sh"
+source "$SCRIPT_DIR/commands/utils.sh"
 
 case "$1" in
 	init)
@@ -17,6 +18,9 @@ case "$1" in
 	    ;;
 	history)
 	    show_history
+	    ;;
+	utils)                    # Temp command to test working
+	    find_project
 	    ;;
 	help|-h|--help)
 	    show_help
