@@ -19,4 +19,5 @@ find_project() {
 	current_dir="$(dirname "$current_dir")"
 
     done
+
 }
