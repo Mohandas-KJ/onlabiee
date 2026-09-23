@@ -6,7 +6,7 @@ init_onlabiee() {
 
     ONLABIEE_DIR="$PROJECT_DIR/.onlabiee"
     LOGS_DIR="$ONLABIEE_DIR/logs"
-    CONF_F="$ONLABIEE_DIR/config"
+    CONF_F="$ONLABIEE_DIR/config.json"
 
     if [ -d "$ONLABIEE_DIR" ]; then
          echo "Onlabiee hist repo already exists!"
@@ -14,11 +14,7 @@ init_onlabiee() {
     fi
 
     mkdir -p "$LOGS_DIR"
-
-    cat > "$CONF_F" << EOF
-PROJECT=$PROJECT_NAME
-CREATED=$(date "+%Y-%m-%d %H:%M:%S")
-EOF
+    jq -n --arg name "$PROJECT_NAME" --arg date "$(date "+%Y-%m-%d %H:%M:%S")" '{project: $name,date: $date}' > "$CONF_F"
 
     echo "Initialized onlabiee on project: $PROJECT_NAME"
 }
